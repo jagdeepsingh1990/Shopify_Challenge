@@ -11,15 +11,24 @@ import Alamofire
 import SwiftyJSON
 
 class ViewController: UIViewController{
-
-    // MARK: - Variables
+    
+   // Outlets
     
     @IBOutlet weak var tableview: UITableView!
+    
+     // MARK: - Variables
+    
+    var json = JSON()
     let urlString = "https://shopicruit.myshopify.com/admin/orders.json?page=1&access_token=c32313df0d0ef512ca64d5b336a0d7c6"
     
     var ProvinceNAmeDict = [String : Int]()
+    var Yeardict = [Int : Int]()
     var ProvincesArry = [String]()
-    var orderCounterArry = [Int]()
+    
+    var orderbydate = [Int]()
+    var orderbyYearArr = [Int]()
+    var ordercountbyyearArr = [Int]()
+    var orderCounterArryS1 = [Int]()
     
     
     
@@ -27,17 +36,11 @@ class ViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-       fetchdata()
+        fetchdata()
         
-
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
         
-        //self.tableview.reloadData()
     }
-    
-    
+    // Api call to fetch data
     
     func fetchdata() {
         Alamofire.request(urlString, method: .get, parameters: nil, encoding: JSONEncoding.prettyPrinted , headers: nil).responseJSON { (response) in
@@ -47,46 +50,77 @@ class ViewController: UIViewController{
                 
                 return
             }
-            let json = JSON(response.result.value!)
-            print(json)
+            self.json = JSON(response.result.value!)
+            print(self.json)
+            self.parseData()
+        }
+    }
+    
+    
+    
+    
+    func parseData() {
+        
+        var province = (((self.json["orders"].arrayValue).map({$0 ["billing_address"]})).map({$0["province"].stringValue}))
+        province = province.filter { $0 != "" }
+        
+        let orderbyDate = (((self.json)["orders"].arrayValue).map({$0["created_at"].string!}))
+        
+        
+        for year in orderbyDate {
+            //convert string to date
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ssZZZ"
+            let date = dateFormatter.date(from: year)
+            print(date!)
+            let calendar = Calendar.current
+            //get year from date
+            let year1 = calendar.component(.year, from: date!)
+            print(year1)
+            // Append each string date to array
+            self.orderbydate.append(year1)
             
-            var province = (((json["orders"].arrayValue).map({$0 ["billing_address"]})).map({$0["province"].stringValue}))
-            province = province.filter { $0 != "" }
-            var orderbyDate = (((json)["orders"].arrayValue).map({$0["created_at"].string!}))
-            for year in orderbyDate {
-                let start = year
-                //let end = "2017-11-12"
-                let dateFormat = "yyyy-MM-dd"
-                
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = dateFormat
-                var arrayOfDates = [Date]()
-                let startDate = dateFormatter.date(from: start)
-               // arrayOfDates.append(startDate!)
-            }
-            for name in province {
-                if let count = self.ProvinceNAmeDict[name] {
-                    self.ProvinceNAmeDict[name] = count + 1
-                } else {
-                    self.ProvinceNAmeDict[name] = 1
-                }
-            }
-            for (key,value) in self.ProvinceNAmeDict {
-                self.ProvincesArry.append(key)
-                self.orderCounterArry.append(value)
-                
-                print("\(key) : \(self.ProvinceNAmeDict[key]!)")
-                DispatchQueue.main.async {
-                    self.tableview.reloadData()
-                }
-                
-            }
-           // let sortedArray = self.ProvinceNAmeDict.keys.sorted { $0.localizedCaseInsensitiveCompare($1) == ComparisonResult.orderedAscending }
-           // print(sortedArray)
             
             
         }
-    
+        // get total order by year
+        
+        for year in self.orderbydate {
+            if let count = self.Yeardict[year] {
+                self.Yeardict[year] = count + 1
+            }else {
+                self.Yeardict[year] = 1
+            }
+        }
+        for (key,value) in self.Yeardict {
+            
+            print("\(key) : \(self.Yeardict[key]!)")
+            self.orderbyYearArr.append(key)
+            self.ordercountbyyearArr.append(value)
+            
+        }
+        //get province name and total numbers of orders from that province
+        for name in province {
+            if let count = self.ProvinceNAmeDict[name] {
+                self.ProvinceNAmeDict[name] = count + 1
+            } else {
+                self.ProvinceNAmeDict[name] = 1
+            }
+        }
+        for (key,value) in self.ProvinceNAmeDict {
+            self.ProvincesArry.append(key)
+            self.orderCounterArryS1.append(value)
+            
+            print("\(key) : \(self.ProvinceNAmeDict[key]!)")
+            DispatchQueue.main.async {
+                self.tableview.reloadData()
+            }
+            
+        }
+        // let sortedArray = self.ProvinceNAmeDict.keys.sorted { $0.localizedCaseInsensitiveCompare($1) == ComparisonResult.orderedAscending }
+        // print(sortedArray)
+        
+        
     }
     
     
@@ -96,14 +130,24 @@ extension ViewController: UITableViewDelegate , UITableViewDataSource{
         return 2
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == 1 {
+            return ordercountbyyearArr.count
+        }
         return ProvincesArry.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let section = indexPath.section
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TableViewCell
         
         cell.backgroundColor = UIColor.gray
-        cell.proviceTitleName.text = ProvincesArry[indexPath.row]
-        cell.ordercounterLbl.text = ("\(orderCounterArry[indexPath.row]) number of order from \(ProvincesArry[indexPath.row])")
+        if section == 0 {
+            cell.proviceTitleName.text = ProvincesArry[indexPath.row]
+            cell.ordercounterLbl.text = ("\(orderCounterArryS1[indexPath.row]) number of order from \(ProvincesArry[indexPath.row])")
+        }else {
+            
+            cell.ordercounterLbl.text = ("\(ordercountbyyearArr[indexPath.row]) number of order created in \(orderbyYearArr[indexPath.row])")
+        }
         return cell
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
