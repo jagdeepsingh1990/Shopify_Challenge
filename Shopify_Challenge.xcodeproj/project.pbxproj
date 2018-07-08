@@ -12,6 +12,8 @@
 		1B3D077A20F1457F00D6C216 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1B3D077820F1457F00D6C216 /* Main.storyboard */; };
 		1B3D077C20F1458200D6C216 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B3D077B20F1458200D6C216 /* Assets.xcassets */; };
 		1B3D077F20F1458200D6C216 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1B3D077D20F1458200D6C216 /* LaunchScreen.storyboard */; };
+		1BC920C620F14B70006D5A8E /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC920C520F14B70006D5A8E /* TableViewCell.swift */; };
+		60C70E2A9CB8E1A502F0B0A5 /* Pods_Shopify_Challenge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C81EC2779005693DB54C75C8 /* Pods_Shopify_Challenge.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,10 @@
 		1B3D077B20F1458200D6C216 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1B3D077E20F1458200D6C216 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1B3D078020F1458200D6C216 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1BC920C520F14B70006D5A8E /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		844A889E71C06A55C2861C76 /* Pods-Shopify_Challenge.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shopify_Challenge.release.xcconfig"; path = "Pods/Target Support Files/Pods-Shopify_Challenge/Pods-Shopify_Challenge.release.xcconfig"; sourceTree = "<group>"; };
+		982FF4D8017609C9C2A3CD86 /* Pods-Shopify_Challenge.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shopify_Challenge.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Shopify_Challenge/Pods-Shopify_Challenge.debug.xcconfig"; sourceTree = "<group>"; };
+		C81EC2779005693DB54C75C8 /* Pods_Shopify_Challenge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Shopify_Challenge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +35,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				60C70E2A9CB8E1A502F0B0A5 /* Pods_Shopify_Challenge.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +47,8 @@
 			children = (
 				1B3D077320F1457F00D6C216 /* Shopify_Challenge */,
 				1B3D077220F1457F00D6C216 /* Products */,
+				E2FF7BD4A5FF9FB7EC4A82A1 /* Pods */,
+				BB33A2BA40AC03E984ECEC07 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -60,8 +69,26 @@
 				1B3D077B20F1458200D6C216 /* Assets.xcassets */,
 				1B3D077D20F1458200D6C216 /* LaunchScreen.storyboard */,
 				1B3D078020F1458200D6C216 /* Info.plist */,
+				1BC920C520F14B70006D5A8E /* TableViewCell.swift */,
 			);
 			path = Shopify_Challenge;
+			sourceTree = "<group>";
+		};
+		BB33A2BA40AC03E984ECEC07 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C81EC2779005693DB54C75C8 /* Pods_Shopify_Challenge.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E2FF7BD4A5FF9FB7EC4A82A1 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				982FF4D8017609C9C2A3CD86 /* Pods-Shopify_Challenge.debug.xcconfig */,
+				844A889E71C06A55C2861C76 /* Pods-Shopify_Challenge.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -71,9 +98,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1B3D078320F1458200D6C216 /* Build configuration list for PBXNativeTarget "Shopify_Challenge" */;
 			buildPhases = (
+				620DF6D6B642960E7E1089CC /* [CP] Check Pods Manifest.lock */,
 				1B3D076D20F1457F00D6C216 /* Sources */,
 				1B3D076E20F1457F00D6C216 /* Frameworks */,
 				1B3D076F20F1457F00D6C216 /* Resources */,
+				ECE52C7BB9FA603464265F50 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -130,11 +159,53 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		620DF6D6B642960E7E1089CC /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Shopify_Challenge-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		ECE52C7BB9FA603464265F50 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Shopify_Challenge/Pods-Shopify_Challenge-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Shopify_Challenge/Pods-Shopify_Challenge-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		1B3D076D20F1457F00D6C216 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1BC920C620F14B70006D5A8E /* TableViewCell.swift in Sources */,
 				1B3D077720F1457F00D6C216 /* ViewController.swift in Sources */,
 				1B3D077520F1457F00D6C216 /* AppDelegate.swift in Sources */,
 			);
@@ -280,16 +351,18 @@
 		};
 		1B3D078420F1458200D6C216 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 982FF4D8017609C9C2A3CD86 /* Pods-Shopify_Challenge.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 29R9MTX8J8;
 				INFOPLIST_FILE = Shopify_Challenge/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.-self.Shopify-Challenge";
+				PRODUCT_BUNDLE_IDENTIFIER = com.selfLearner;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -298,16 +371,18 @@
 		};
 		1B3D078520F1458200D6C216 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 844A889E71C06A55C2861C76 /* Pods-Shopify_Challenge.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 29R9MTX8J8;
 				INFOPLIST_FILE = Shopify_Challenge/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.-self.Shopify-Challenge";
+				PRODUCT_BUNDLE_IDENTIFIER = com.selfLearner;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
